@@ -1,0 +1,47 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<h2 class="listingsTitle">Active Listings</h2>
+<form action="" method="POST">
+    {% csrf_token %}
+    <select name="choice">
+        {% for category in categories %}
+        <option value="{{category.id}}" {% if category.id in choice %} selected {% endif %}>
+            {{choice}}
+        </option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="choice">
+</form>
+
+<hr>
+<div class="container-fluid">
+    {% for auction in auctions %}
+    <div class="itemListing">
+        <div class="imgItem">
+            <img src="{{auction.image_url}}" alt="">
+        </div>
+        <div class="detailsItem">
+            <!-- <a href="/item/{{auction.id}}">
+                <h2>{{auction.title}}</h2>
+            </a> -->
+            <a href="{% url 'item' auction_id=auction.id %}">
+                <h2>{{auction.title}}</h2>
+            </a>
+
+            <p><strong>price: </strong> <span>{{auction.price}}</span> euro</p>
+
+
+            <span>created: {{auction.created}}</span>
+            <br>
+            <span>posted by: {{auction.author}}</span>
+        </div>
+    </div>
+    {% empty %}
+    <p>No auctions in this category</p>
+    {% endfor %}
+
+</div>
+
+
+{% endblock %}
