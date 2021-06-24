@@ -57,3 +57,15 @@ class Comment(models.Model):
     def __str__(self):
 
         return self.author.username
+
+
+class Watchlist(models.Model):
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    auction = models.ForeignKey(
+        Auction_listings, on_delete=models.CASCADE)
+    added = models.BooleanField(default=False)
+
+    def __str__(self):
+
+        return self.author.username

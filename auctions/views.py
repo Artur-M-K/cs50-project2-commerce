@@ -2,13 +2,13 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.forms import ModelForm
 from django.utils import timezone
 from django import forms
 
-from .models import User, Auction_listings, Bid, Category, Comment
+from .models import User, Auction_listings, Bid, Category, Comment, Watchlist
 
 
 class CreateListing(forms.ModelForm):
@@ -146,6 +146,8 @@ def item(request, auction_id):
     bids = Bid.objects.filter(auction=auction)
     last_bid = Bid.objects.all().reverse().last()
     comments = Comment.objects.filter(auction=auction)
+    watchlist = Watchlist.objects.filter(
+        author=request.user, auction=auction).exists()
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse("login"))
 
@@ -163,7 +165,8 @@ def item(request, auction_id):
         'price': actual_bid,
         'min_bid': actual_bid+1,
         'last': last_bid,
-        'comments': comments
+        'comments': comments,
+        'watchlist': watchlist
 
     })
 
@@ -198,3 +201,30 @@ def comment(request, auction_id):
             newComment.save()
 
     return HttpResponseRedirect(reverse("item", kwargs={'auction_id': auction_id}))
+
+
+@login_required
+def watchlist_add(request, auction_id):
+    auction = Auction_listings.objects.get(id=auction_id)
+
+    if Watchlist.objects.filter(author=request.user, auction=auction).exists() == False:
+        watchlist = Watchlist(author=request.user, auction=auction)
+        watchlist.save()
+    return redirect('item', auction_id=auction_id)
+
+
+@login_required
+def watchlist_remove(request, auction_id):
+    auction = Auction_listings.objects.get(id=auction_id)
+    if Watchlist.objects.filter(author=request.user, auction=auction).exists():
+        Watchlist.objects.filter(author=request.user, auction=auction).delete()
+    return HttpResponseRedirect(reverse("watchlist"))
+
+
+@login_required
+def watchlist(request):
+    auctions = Watchlist.objects.filter(author=request.user)
+    return render(request, "auctions/watchlist.html", {
+        "auctions": auctions,
+
+    })

@@ -5,7 +5,11 @@
     <div class="imageItem"><img src="{{auction.image_url}}" alt=""></div>
     <div class="detailsOfItem">
         <h2>{{auction.title}}</h2>
-        <div class="wishlist">Whishlist<i class="far fa-star"></i></div>
+        {% if watchlist %}
+        <a href="{% url 'watchlist_remove' auction_id %}">Remove<i class="fas fa-plus"></i></a>
+        {% else %}
+        <a href="{% url 'watchlist_add' auction_id %}">Add to watchlist<i class="fas fa-plus"></i></a>
+        {% endif %}
         <p><strong>price: </strong> <span>{{price}}</span> euro</p>
         <p>posted by: <span id="author">{{auction.author}}</span></p>
         {% if auction.active and user.is_authenticated %}

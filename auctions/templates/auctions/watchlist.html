@@ -1,0 +1,28 @@
+{% extends 'auctions/layout.html' %}
+
+{% block body %}
+<h1>Watch List</h1>
+
+{% for auction in auctions %}
+<div class="itemListing">
+    <div class="imgItem">
+        <img src="{{auction.auction.image_url}}" alt="">
+    </div>
+    <div class="detailsItem">
+
+        <a href="{% url 'item' auction.auction_id %}">
+            <h2>{{auction.auction.title}}</h2>
+        </a>
+
+        <p><strong>price: </strong> <span>{{auction.auction.price}}</span> euro</p>
+
+
+        <span>created: {{auction.auction.created}}</span>
+        <br>
+        <span>posted by: {{auction.auction.author}}</span>
+    </div>
+</div>
+{% endfor %}
+
+
+{% endblock %}

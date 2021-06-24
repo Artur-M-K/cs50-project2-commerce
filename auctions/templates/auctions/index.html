@@ -7,7 +7,7 @@
     <select name="choice">
         {% for category in categories %}
         <option value="{{category.id}}" {% if category.id in choice %} selected {% endif %}>
-            {{choice}}
+            {{category}}
         </option>
         {% endfor %}
     </select>
