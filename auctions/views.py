@@ -62,12 +62,12 @@ def index(request):
                 "auctions": auctions,
                 "categories": category,
             })
-    else:
-        return render(request, "auctions/index.html", {
-            "auctions": auctions,
-            "categories": category,
+    # else:
+    return render(request, "auctions/index.html", {
+        "auctions": auctions,
+        "categories": category,
 
-        })
+    })
 
 
 def login_view(request):
@@ -146,9 +146,12 @@ def item(request, auction_id):
     bids = Bid.objects.filter(auction=auction)
     last_bid = Bid.objects.all().reverse().last()
     comments = Comment.objects.filter(auction=auction)
-    watchlist = Watchlist.objects.filter(
-        author=request.user, auction=auction).exists()
+    if request.user.is_authenticated:
+        watchlist = Watchlist.objects.filter(
+            author=request.user, auction=auction).exists()
+
     if not request.user.is_authenticated:
+        watchlist = None
         return HttpResponseRedirect(reverse("login"))
 
     actual_bid = auction.price
