@@ -6,9 +6,10 @@
     <div class="detailsOfItem">
         <h2>{{auction.title}}</h2>
         {% if watchlist %}
-        <a href="{% url 'watchlist_remove' auction_id %}">Remove<i class="fas fa-plus"></i></a>
+        <a class="watchlist" href="{% url 'watchlist_remove' auction_id %}">Remove </a>
         {% else %}
-        <a href="{% url 'watchlist_add' auction_id %}">Add to watchlist<i class="fas fa-plus"></i></a>
+        <a class="watchlist" href="{% url 'watchlist_add' auction_id %}">Add to watchlist <i
+                class="fas fa-plus"></i></a>
         {% endif %}
         <p><strong>price: </strong> <span>{{price}}</span> euro</p>
         <p>posted by: <span id="author">{{auction.author}}</span></p>
@@ -26,6 +27,23 @@
         {% empty %}
         <p>No bids yet</p>
         {% endfor %}
+        {% if auction.author == request.user %}
+        <a href="{% url 'auctionend' auction_id %}"><button class="btn btn-warning" type="button">End
+                Auction</button></a>
+        {% endif %}
+        {% if messages %}
+        {% for message in messages %}
+        <h3>{{message}}</h3>
+        {% endfor %}
+        {% endif %}
+
+        {% if auction.active == False %}
+        {% if last.author == request.user %}
+        <h4>You WON AUCTION!!!</h4>
+        {% else %}
+        <h4>{{last.author}} won, with a bid of {{price}}</h4>
+        {% endif %}
+        {% endif %}
 
         <form action="{% url 'comment' auction.id %}" method="post">
             {% csrf_token %}

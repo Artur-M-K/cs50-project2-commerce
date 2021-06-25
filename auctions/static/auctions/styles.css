@@ -167,6 +167,7 @@ nav {
     line-height: 40px;
 }
 
+
 .user {
     background: #000 !important;
     line-height: 30px;
@@ -322,4 +323,19 @@ p a:hover {
 
 .detailsItem span {
     font-weight: 200;
+}
+
+.watchlist {
+    position: absolute;
+    right: 0px;
+    top: 40px;
+    width: 200px;
+    height: 50px;
+    padding: 10px 10px;
+    text-decoration: none;
+    background: #DB3B0D;
+    color: white;
+    text-align: center;
+    line-height: 32px;
+    font-size: 1.2rem;
 }

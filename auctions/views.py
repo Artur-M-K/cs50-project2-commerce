@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.forms import ModelForm
@@ -176,7 +177,7 @@ def item(request, auction_id):
 
 @login_required
 def bid(request, auction_id):
-    # if request.method == 'POST':
+
     auction = Auction_listings.objects.get(id=auction_id)
     if request.method == 'POST':
         form = PlaceBid(request.POST or None)
@@ -231,3 +232,14 @@ def watchlist(request):
         "auctions": auctions,
 
     })
+
+
+@login_required
+def auctionend(request, auction_id):
+    auction = Auction_listings.objects.get(id=auction_id)
+    if auction.author == request.user:
+        auction.active = False
+        auction.save()
+        messages.success(
+            request, f'Auction for {auction.title} successfully closed!')
+    return HttpResponseRedirect(reverse("item", kwargs={'auction_id': auction_id}))
