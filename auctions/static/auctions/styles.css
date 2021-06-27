@@ -6,11 +6,7 @@
     box-sizing: border-box;
 }
 
-/* html {
-    font-family: 'Montserrat', sans-serif !important;
- } */
-
-.container {
+.containerMain {
     width: 80vw;
     height: 100vh;
     margin: 0 auto;
@@ -19,7 +15,9 @@
 
 .containerItem {
     display: flex;
-    width: 80vw;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
     height: 100vh;
 }
 
@@ -32,9 +30,9 @@
 
 .imageItem img {
     position: absolute;
-    top: 50%;
+    top: 0%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 0%);
 }
 
 .detailsOfItem {
@@ -43,27 +41,65 @@
     position: relative;
 }
 
-.detailsOfItem h2 {
-    font-size: 2.6rem;
-    margin: 40px 0 15px 30px;
+.headerItem {
+    display: flex;
+    margin-bottom: 15px;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #bbb;
 }
 
-.detailsOfItem p {
+.headerItem h2 {
+    font-size: 2.6rem;
+    margin: 30px 0 15px 0px;
+}
+
+#mainItem_description p {
+    border-bottom: 1px solid #bbb;
+}
+
+.headerStyle {
+    width: 110px;
+    padding: 2px 4px;
+    font-weight: bold;
+
+}
+
+.mainItem p {
     text-align: center;
     font-size: 1.1rem;
+    margin-bottom: 0;
     padding: 5px 0;
-    background: #eee;
-
 }
 
-.detailsOfItem p strong {
-    font-size: 1.1rem;
-}
-
-.detailsOfItem p span {
+.mainItem p span {
     font-size: 3rem;
     font-weight: bold;
     font-style: italic;
+}
+
+.priceContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #bbb;
+}
+
+#price {
+    font-size: 1.5rem;
+}
+
+#price span {
+    font-size: 5rem;
+}
+
+#auctionAuthor {
+    margin-bottom: 15px;
+    padding: 10px 15px 10px 15px;
+    background: #000;
+    color: white;
+    border-radius: 5px;
 }
 
 #author {
@@ -71,6 +107,16 @@
     font-weight: bold;
     font-size: 1.3rem;
 }
+
+#bid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #bbb;
+}
+
+#addComment {}
 
 .wishlist {
     position: absolute;
@@ -236,7 +282,8 @@ nav {
     margin-right: auto;
 }
 
-.save {
+.save,
+.btn-primary {
     width: 100px;
     height: 40px;
     margin-top: 20px;
@@ -250,6 +297,22 @@ nav {
     border: none;
     cursor: pointer;
     transition: .4s;
+}
+
+.btn-primary {
+    width: 50px;
+    border-radius: 0;
+    margin: 0;
+    line-height: 40px;
+}
+
+
+#comment {
+    width: 70%;
+}
+
+.btn-primary:hover {
+    background: #000;
 }
 
 .itemListing {
@@ -322,7 +385,8 @@ p a:hover {
     margin: 15px 0;
 }
 
-.detailsItem p strong {
+.detailsItem p strong,
+.mainItem p strong {
     margin-right: 10px;
     padding: 3px 5px;
     background: #000;
@@ -340,9 +404,6 @@ p a:hover {
 }
 
 .watchlist {
-    position: absolute;
-    right: 0px;
-    top: 40px;
     width: 200px;
     height: 50px;
     padding: 10px 10px;
@@ -352,4 +413,37 @@ p a:hover {
     text-align: center;
     line-height: 32px;
     font-size: 1.2rem;
+}
+
+.watchlist:hover {
+    color: white;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+form input {
+    width: 200px;
+    height: 40px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    outline-style: none;
+}
+
+label {
+    width: 200px;
+    height: 40px;
+    background: #000;
+    color: white;
+    /* padding: 2px 5px; */
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 200;
+    text-align: center;
+    line-height: 40px;
 }
