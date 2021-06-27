@@ -19,7 +19,7 @@
                 <p>{{auction.description}}</p>
             </div>
             <div class="priceContainer">
-                <p id="price"><strong>price: </strong> <span>{{price}}</span> euro</p>
+                <p id="price"> <span>{{price}}</span> euro</p>
                 <p id="auctionAuthor">posted by: <span id="author">{{auction.author}}</span></p>
             </div>
 
@@ -27,7 +27,7 @@
             <div id="bid">
                 <form action="{% url 'bid' auction.id %}" method="post">
                     {% csrf_token %}
-                    <label for="bid">Place a bid</label>
+                    <label class="labelItem" for="bid">Place a bid</label>
                     <input type="number" name="bid" placeholder='Place a bid...' min='{{min_bid}}' value='{{min_bid}}'>
                     <button class="btn btn-primary" type="submit"><i class="fas fa-plus"></i></a></button>
                 </form>
@@ -62,21 +62,23 @@
             <div id="addComment">
                 <form action="{% url 'comment' auction.id %}" method="post">
                     {% csrf_token %}
-                    <label for="comment">Add a comment</label>
+                    <label class="labelItem" for="comment">Add a comment</label>
                     <input type="text" name='comment' id="comment">
                     <button class="btn btn-primary" type="submit"><i class="fas fa-plus"></i></a></button>
                 </form>
             </div>
 
-
-
-            {% for comment in comments %}
-            <div>
-                <br>
-                <h6>{{comment.date}} - {{comment.author}}</h6>
-                <p>{{comment.comment}}</p>
+            <div id="comments">
+                <h6 class="headerStyle">Comments:</h6>
+                {% for comment in comments %}
+                <div>
+                    <h6 id="commentHeader">{{comment.date}} - {{comment.author}}</h6>
+                    <p>{{comment.comment}}</p>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
+
+
         </div>
     </div>
 </div>

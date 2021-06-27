@@ -80,14 +80,14 @@
 
 .priceContainer {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
+    align-items: flex-end;
     border-bottom: 1px solid #bbb;
 }
 
 #price {
     font-size: 1.5rem;
+    margin-left: 25%;
 }
 
 #price span {
@@ -95,7 +95,7 @@
 }
 
 #auctionAuthor {
-    margin-bottom: 15px;
+    margin-bottom: 34px;
     padding: 10px 15px 10px 15px;
     background: #000;
     color: white;
@@ -112,11 +112,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 0;
+    padding: 25px 0;
     border-bottom: 1px solid #bbb;
 }
 
-#addComment {}
+#addComment {
+    padding: 25px 0;
+    border-bottom: 1px solid #bbb;
+}
 
 .wishlist {
     position: absolute;
@@ -250,10 +253,6 @@ nav {
     outline-style: none;
 }
 
-/* .form-style {
-    height: 30px;
-} */
-
 #id_image_url,
 #id_title,
 #id_description,
@@ -308,7 +307,7 @@ nav {
 
 
 #comment {
-    width: 70%;
+    width: 71%;
 }
 
 .btn-primary:hover {
@@ -434,7 +433,7 @@ form input {
     outline-style: none;
 }
 
-label {
+.labelItem {
     width: 200px;
     height: 40px;
     background: #000;
@@ -446,4 +445,24 @@ label {
     font-weight: 200;
     text-align: center;
     line-height: 40px;
+}
+
+#comments {
+    margin-top: 15px;
+}
+
+#commentHeader {
+    padding: 3px 0;
+    font-size: small;
+    font-style: italic;
+    color: #DB3B0D;
+    border-bottom: 1px dotted #bbb;
+}
+
+#comments p {
+    text-align: left;
+    margin-bottom: 5px;
+    padding-left: 15px;
+    background: #ddd;
+    border-radius: 15px;
 }
