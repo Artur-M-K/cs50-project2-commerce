@@ -42,7 +42,6 @@ class Bid(models.Model):
         Auction_listings, on_delete=models.CASCADE)
 
     def __str__(self):
-        # return f"{self.id} : {self.author.username} bid {self.place_bid} on {self.auction.title} at {self.date}"
         return self.author.username
 
 

@@ -39,32 +39,51 @@ def index(request):
 
     auctions = Auction_listings.objects.filter(active=True)
     category = Category.objects.all()
+    print(auctions)
+    if auctions:
+        if request.method == "POST":
+            choices = request.POST.get('choice')
+            if choices == '1':
+                auctions = Auction_listings.objects.all()
+                return render(request, "auctions/index.html", {
+                    "auctions": auctions,
+                    "categories": category,
+                })
 
-    # return render(request, "auctions/index.html", {
-    #     "auctions": auctions,
-    #     "categories": category,
-
-    # })
-    if request.method == "POST":
-        choices = request.POST.get('choice')
-        # print(choices)
-        if choices == '1':
-            # print(choices)
-            auctions = Auction_listings.objects.all()
-            return render(request, "auctions/index.html", {
-                "auctions": auctions,
-                "categories": category,
-            })
-
-        if choices != '1':
-            print(choices)
-            auctions = Auction_listings.objects.filter(category=choices)
-            return render(request, "auctions/index.html", {
-                "auctions": auctions,
-                "categories": category,
-            })
-    # else:
+            if choices != '1':
+                auctions = Auction_listings.objects.filter(category=choices)
+                return render(request, "auctions/index.html", {
+                    "auctions": auctions,
+                    "categories": category,
+                })
     return render(request, "auctions/index.html", {
+        "auctions": auctions,
+        "categories": category,
+
+    })
+
+
+@login_required
+def closed_auctions(request):
+    auctions = Auction_listings.objects.filter(active=False)
+    category = Category.objects.all()
+    if auctions:
+        if request.method == "POST":
+            choices = request.POST.get('choice')
+            if choices == '1':
+                auctions = Auction_listings.objects.all()
+                return render(request, "auctions/index.html", {
+                    "auctions": auctions,
+                    "categories": category,
+                })
+
+            if choices != '1':
+                auctions = Auction_listings.objects.filter(category=choices)
+                return render(request, "auctions/index.html", {
+                    "auctions": auctions,
+                    "categories": category,
+                })
+    return render(request, "auctions/closed_auctions.html", {
         "auctions": auctions,
         "categories": category,
 
@@ -123,7 +142,7 @@ def register(request):
         return render(request, "auctions/register.html")
 
 
-@login_required
+@ login_required
 def create(request):
     if request.method == 'POST':
         form = CreateListing(request.POST)
@@ -137,15 +156,11 @@ def create(request):
     return render(request, "auctions/create.html", {
         'form': form
     })
-    # return render(request, "auctions/index.html", {
-    #     "auctions": Auction_listings.objects.all()
-    # })
 
 
 def item(request, auction_id):
     auction = Auction_listings.objects.get(id=auction_id)
     bids = Bid.objects.filter(auction=auction)
-    last_bid = Bid.objects.all().reverse().last()
     comments = Comment.objects.filter(auction=auction)
     if request.user.is_authenticated:
         watchlist = Watchlist.objects.filter(
@@ -168,14 +183,13 @@ def item(request, auction_id):
         'bids': bids,
         'price': actual_bid,
         'min_bid': actual_bid+1,
-        'last': last_bid,
         'comments': comments,
         'watchlist': watchlist
 
     })
 
 
-@login_required
+@ login_required
 def bid(request, auction_id):
 
     auction = Auction_listings.objects.get(id=auction_id)
@@ -192,7 +206,7 @@ def bid(request, auction_id):
     return HttpResponseRedirect(reverse("item", kwargs={'auction_id': auction_id}))
 
 
-@login_required
+@ login_required
 def comment(request, auction_id):
     auction = Auction_listings.objects.get(id=auction_id)
     if request.method == 'POST':
@@ -207,7 +221,7 @@ def comment(request, auction_id):
     return HttpResponseRedirect(reverse("item", kwargs={'auction_id': auction_id}))
 
 
-@login_required
+@ login_required
 def watchlist_add(request, auction_id):
     auction = Auction_listings.objects.get(id=auction_id)
 
@@ -217,7 +231,7 @@ def watchlist_add(request, auction_id):
     return redirect('item', auction_id=auction_id)
 
 
-@login_required
+@ login_required
 def watchlist_remove(request, auction_id):
     auction = Auction_listings.objects.get(id=auction_id)
     if Watchlist.objects.filter(author=request.user, auction=auction).exists():
@@ -225,7 +239,7 @@ def watchlist_remove(request, auction_id):
     return HttpResponseRedirect(reverse("watchlist"))
 
 
-@login_required
+@ login_required
 def watchlist(request):
     auctions = Watchlist.objects.filter(author=request.user)
     return render(request, "auctions/watchlist.html", {
@@ -234,7 +248,7 @@ def watchlist(request):
     })
 
 
-@login_required
+@ login_required
 def auctionend(request, auction_id):
     auction = Auction_listings.objects.get(id=auction_id)
     if auction.author == request.user:

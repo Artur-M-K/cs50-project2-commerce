@@ -6,19 +6,23 @@
     box-sizing: border-box;
 }
 
+
 .containerMain {
+
     width: 80vw;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0 auto;
     font-family: 'Montserrat', sans-serif !important;
 }
 
 .containerItem {
+
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     width: 100%;
-    height: 100vh;
+    min-height: 120vh;
+    margin-top: 15px;
 }
 
 .imageItem {
@@ -37,7 +41,6 @@
 
 .detailsOfItem {
     width: 70%;
-    height: 60vh;
     position: relative;
 }
 
@@ -85,9 +88,19 @@
     border-bottom: 1px solid #bbb;
 }
 
+#endAuction,
+#blank {
+    align-self: flex-start;
+    margin-top: 15px;
+}
+
+#blank {
+    width: 125px;
+}
+
 #price {
     font-size: 1.5rem;
-    margin-left: 25%;
+    margin: 0 10%;
 }
 
 #price span {
@@ -95,6 +108,7 @@
 }
 
 #auctionAuthor {
+    align-self: flex-end;
     margin-bottom: 34px;
     padding: 10px 15px 10px 15px;
     background: #000;
@@ -118,7 +132,6 @@
 
 #addComment {
     padding: 25px 0;
-    border-bottom: 1px solid #bbb;
 }
 
 .wishlist {
@@ -235,6 +248,11 @@ nav {
 
 .form-control {
     width: 350px !important;
+    border-radius: 0px;
+}
+
+#select-control {
+    width: 250px !important;
 }
 
 .form-control:focus {
@@ -251,6 +269,7 @@ nav {
 .btn-outline-info:hover {
     background: #DB3B0D;
     outline-style: none;
+    border: 1px solid #DB3B0D;
 }
 
 #id_image_url,
@@ -285,7 +304,7 @@ nav {
 .btn-primary {
     width: 100px;
     height: 40px;
-    margin-top: 20px;
+    margin-bottom: 15px;
     padding: 2px 5px;
     font-family: 'Montserrat', sans-serif;
     font-size: 1.3rem;
@@ -433,12 +452,15 @@ form input {
     outline-style: none;
 }
 
+#categories {
+    width: 150px;
+}
+
 .labelItem {
     width: 200px;
     height: 40px;
     background: #000;
     color: white;
-    /* padding: 2px 5px; */
     margin: 0;
     font-family: 'Montserrat', sans-serif;
     font-size: 1.3rem;
@@ -448,7 +470,14 @@ form input {
 }
 
 #comments {
-    margin-top: 15px;
+    margin: 15px 0;
+}
+
+#comments .headerStyle {
+    width: 100%;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #bbb;
 }
 
 #commentHeader {
@@ -465,4 +494,25 @@ form input {
     padding-left: 15px;
     background: #ddd;
     border-radius: 15px;
+    word-wrap: break-word;
+    font-size: .9rem;
+}
+
+.success {
+    width: 100%;
+    margin: 0;
+    padding: 10px 20px;
+    background: #FFC107;
+    text-align: center;
+}
+
+footer {
+    width: 80vw;
+    height: 50px;
+    margin: 0 auto;
+    padding-top: 10px;
+    background: #000;
+    color: white;
+    text-align: center;
+
 }

@@ -6,7 +6,6 @@
     <title>{% block title %}Auctions{% endblock %}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <!-- <link rel="preconnect" href="https://fonts.gstatic.com"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
         crossorigin="anonymous" />
@@ -35,6 +34,9 @@
                     <a href="{% url 'watchlist' %}" class="nav-link">Watchlist
                         <strong>{{watchlist_all|length}}</strong></a>
                 </li>
+                <li class="nav-item">
+                    <a href="{% url 'closed_auctions' %}" class="nav-link">Closed Listings</a>
+                </li>
                 {%endif%}
             </ul>
             <ul class="nav nav-right">
@@ -56,12 +58,11 @@
                 {% endif %}
             </ul>
         </nav>
-
-
         {% block body %}
         {% endblock %}
-    </div>
 
+    </div>
+    <footer class="page-footer font-small blue pt-4">Copyright 2021</footer>
 </body>
 
 </html>

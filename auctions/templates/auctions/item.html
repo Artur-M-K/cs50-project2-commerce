@@ -1,6 +1,25 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
+
+{% if messages %}
+{% for message in messages %}
+<h3 class="success">{{message}}</h3>
+{% endfor %}
+{% endif %}
+
+{% if auction.active == False %}
+{% for bid in bids%}
+{% if forloop.last%}
+{% if bid.author == request.user %}
+<h4 class="success">You WON AUCTION!!!</h4>
+{% else %}
+<h4 class="success">{{bid.author}} won, with a bid of {{price}} euro</h4>
+{% endif %}
+{% endif %}
+{% endfor %}
+{% endif %}
+
 <div class="containerItem">
     <div class="imageItem"><img src="{{auction.image_url}}" alt=""></div>
     <div class="detailsOfItem">
@@ -19,8 +38,16 @@
                 <p>{{auction.description}}</p>
             </div>
             <div class="priceContainer">
-                <p id="price"> <span>{{price}}</span> euro</p>
                 <p id="auctionAuthor">posted by: <span id="author">{{auction.author}}</span></p>
+                <p id="price"> <span>{{price}}</span> euro</p>
+                {% if auction.author == request.user and auction.active %}
+                <a href="{% url 'auctionend' auction_id %}" id="endAuction"><button class="btn btn-warning"
+                        type="button">End
+                        Auction</button></a>
+                {% else %}
+                <div id="blank"></div>
+                {% endif %}
+
             </div>
 
             {% if auction.active and user.is_authenticated %}
@@ -34,30 +61,13 @@
                 {% endif %}
                 {% for bid in bids %}
                 {% if forloop.last %}
-                <p>The highest bid made - <span id="author">{{bid}}</span></p>
+                <p>The highest bid made by - <span id="author">{{bid}}</span></p>
                 {% endif %}
                 {% empty %}
                 <p>No bids yet</p>
                 {% endfor %}
-                {% if auction.author == request.user %}
-                <a href="{% url 'auctionend' auction_id %}"><button class="btn btn-warning" type="button">End
-                        Auction</button></a>
-                {% endif %}
+
             </div>
-
-            {% if messages %}
-            {% for message in messages %}
-            <h3>{{message}}</h3>
-            {% endfor %}
-            {% endif %}
-
-            {% if auction.active == False %}
-            {% if last.author == request.user %}
-            <h4>You WON AUCTION!!!</h4>
-            {% else %}
-            <h4>{{last.author}} won, with a bid of {{price}}</h4>
-            {% endif %}
-            {% endif %}
 
             <div id="addComment">
                 <form action="{% url 'comment' auction.id %}" method="post">
