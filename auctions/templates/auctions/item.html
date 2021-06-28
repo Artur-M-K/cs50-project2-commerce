@@ -25,11 +25,14 @@
     <div class="detailsOfItem">
         <div class="headerItem">
             <h2>{{auction.title}}</h2>
+
             {% if watchlist %}
             <a class="watchlist" href="{% url 'watchlist_remove' auction_id %}">Remove </a>
             {% else %}
+            {% if auction.active %}
             <a class="watchlist" href="{% url 'watchlist_add' auction_id %}">Add to watchlist <i
                     class="fas fa-plus"></i></a>
+            {% endif %}
             {% endif %}
         </div>
         <div class="mainItem">

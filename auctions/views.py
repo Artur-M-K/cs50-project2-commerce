@@ -44,17 +44,19 @@ def index(request):
         if request.method == "POST":
             choices = request.POST.get('choice')
             if choices == '1':
-                auctions = Auction_listings.objects.all()
                 return render(request, "auctions/index.html", {
                     "auctions": auctions,
                     "categories": category,
+                    'choiceId': int(choices)
                 })
 
             if choices != '1':
-                auctions = Auction_listings.objects.filter(category=choices)
+                auctions = Auction_listings.objects.filter(
+                    category=choices, active=True)
                 return render(request, "auctions/index.html", {
                     "auctions": auctions,
                     "categories": category,
+                    'choiceId': int(choices)
                 })
     return render(request, "auctions/index.html", {
         "auctions": auctions,
@@ -70,24 +72,28 @@ def closed_auctions(request):
     if auctions:
         if request.method == "POST":
             choices = request.POST.get('choice')
+
             if choices == '1':
-                auctions = Auction_listings.objects.all()
                 return render(request, "auctions/index.html", {
                     "auctions": auctions,
                     "categories": category,
+                    'choiceId': int(choices)
                 })
 
             if choices != '1':
-                auctions = Auction_listings.objects.filter(category=choices)
+                auctions = Auction_listings.objects.filter(
+                    category=choices, active=False)
+                print(choices)
                 return render(request, "auctions/index.html", {
                     "auctions": auctions,
                     "categories": category,
+                    'choiceId': int(choices)
                 })
-    return render(request, "auctions/closed_auctions.html", {
-        "auctions": auctions,
-        "categories": category,
+        return render(request, "auctions/closed_auctions.html", {
+            "auctions": auctions,
+            "categories": category,
 
-    })
+        })
 
 
 def login_view(request):

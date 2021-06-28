@@ -13,7 +13,7 @@
                     <label for="choice" class="labelItem" id="categories">categories:</label>
                     <select name="choice" class="form-control" id="select-control">
                         {% for category in categories %}
-                        <option value="{{category.id}}" {% if category.id in choice %} selected {% endif %}>
+                        <option value="{{category.id}}" {% ifequal category.id choiceId %} selected {% endifequal %}>
                             {{category}}
                         </option>
                         {% endfor %}
