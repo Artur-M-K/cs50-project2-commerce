@@ -25,20 +25,6 @@
     margin-top: 15px;
 }
 
-.imageItem {
-    position: relative;
-    width: 30%;
-    height: 60vh;
-
-}
-
-.imageItem img {
-    position: absolute;
-    top: 0%;
-    left: 50%;
-    transform: translate(-50%, 0%);
-}
-
 .detailsOfItem {
     width: 70%;
     position: relative;
@@ -53,12 +39,13 @@
 }
 
 .headerItem h2 {
-    font-size: 2.6rem;
+    font-size: 2.4rem;
     margin: 30px 0 15px 0px;
 }
 
 #mainItem_description p {
     border-bottom: 1px solid #bbb;
+    padding-bottom: 15px;
 }
 
 .headerStyle {
@@ -100,7 +87,7 @@
 
 #price {
     font-size: 1.5rem;
-    margin: 0 10%;
+    margin: 0 5%;
 }
 
 #price span {
@@ -370,12 +357,28 @@ p a:hover {
 }
 
 .imgItem {
-    min-width: 200px;
-    min-height: 200px;
+    position: relative;
+    width: 250px;
+    height: 250px;
 }
 
 .imgItem img {
-    background-size: cover;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 200px;
+    max-height: 200px;
+}
+
+#imgBig {
+    width: 350px;
+    height: 350px;
+}
+
+#imgBig img {
+    max-width: 300px;
+    max-height: 300px;
 }
 
 .detailsItem {
@@ -396,7 +399,7 @@ p a:hover {
 }
 
 .detailsItem h2 {
-    margin: 5px 0;
+    margin: 25px 0 5px 0;
 }
 
 .detailsItem p {
@@ -422,8 +425,10 @@ p a:hover {
 }
 
 .watchlist {
-    width: 200px;
-    height: 50px;
+    align-self: flex-start;
+    min-width: 200px;
+    min-height: 50px;
+    margin-left: 10px;
     padding: 10px 10px;
     text-decoration: none;
     background: #DB3B0D;

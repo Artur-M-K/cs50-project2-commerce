@@ -89,11 +89,11 @@ def closed_auctions(request):
                     "categories": category,
                     'choiceId': int(choices)
                 })
-        return render(request, "auctions/closed_auctions.html", {
-            "auctions": auctions,
-            "categories": category,
+    return render(request, "auctions/closed_auctions.html", {
+        "auctions": auctions,
+        "categories": category,
 
-        })
+    })
 
 
 def login_view(request):

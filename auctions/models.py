@@ -21,7 +21,7 @@ class Category(models.Model):
 class Auction_listings(models.Model):
     image_url = models.CharField(max_length=1000)
     title = models.CharField(max_length=128)
-    description = models.TextField(max_length=200)
+    description = models.TextField(max_length=1000)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     price = models.DecimalField(decimal_places=2, max_digits=1000)
     created = models.DateTimeField(default=timezone.now, blank=True)
