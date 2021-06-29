@@ -121,21 +121,6 @@
     padding: 25px 0;
 }
 
-.wishlist {
-    position: absolute;
-    right: 0px;
-    top: 5px;
-    padding: 5px 10px;
-    font-size: 1.1rem;
-    border: 2px solid black;
-    border-radius: .3rem;
-}
-
-.wishlist i {
-    font-size: 1.3rem;
-    padding-left: 5px;
-}
-
 .logo {
     position: relative;
     background: #DB3B0D;
@@ -311,13 +296,12 @@ nav {
     line-height: 40px;
 }
 
+.btn-primary:hover {
+    background: #000;
+}
 
 #comment {
     width: 71%;
-}
-
-.btn-primary:hover {
-    background: #000;
 }
 
 .itemListing {

@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.urls import reverse
@@ -39,7 +39,6 @@ def index(request):
 
     auctions = Auction_listings.objects.filter(active=True)
     category = Category.objects.all()
-    print(auctions)
     if auctions:
         if request.method == "POST":
             choices = request.POST.get('choice')
@@ -83,7 +82,6 @@ def closed_auctions(request):
             if choices != '1':
                 auctions = Auction_listings.objects.filter(
                     category=choices, active=False)
-                print(choices)
                 return render(request, "auctions/index.html", {
                     "auctions": auctions,
                     "categories": category,
