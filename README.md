@@ -2,6 +2,8 @@
 CS50's Web Programming with Python and JavaScript : CS50w Project2 - eCommerce
 # [Live Demo](https://auctions-app-harvard.herokuapp.com/)
 
+![auctions](https://user-images.githubusercontent.com/80982136/128226332-41f3769e-7da9-4e45-862e-600fd146d0bb.gif)
+
 ## General info
 This is one of the Harvard Course projects - **eCommerce auctions app**. \
 eBay-like e-commerce auction site that will allow users to post auction listings, place bids on listings, comment on those listings, and add listings to a “watchlist.”
